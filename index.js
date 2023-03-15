@@ -15,13 +15,15 @@ function addItem(e){
 
   // Get input value
   var newItem = document.getElementById('item').value;
+  var description = document.getElementById('item1').value;
+  let combineItem= newItem+" "+description;
 
   // Create new li element
   var li = document.createElement('li');
   // Add class
   li.className = 'list-group-item';
   // Add text node with input value
-  li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(combineItem));
 
   // Create del button element
   var deleteBtn = document.createElement('button');
@@ -54,4 +56,16 @@ function removeItem(e){
       itemList.removeChild(li);
     }
   }
+}
+function filterItems(e){
+    var text= e.target.value.toLowerCase();
+    var items=itemList.getElementsByTagName('li');
+    Array.from(items).forEach(function(item){
+        var itemName= item.firstChild.textContent;
+        if(itemName.toLowerCase().indexOf(text)!= -1){
+            item.style.display='block';
+        }else{
+            item.style.display='none';
+        }
+    })
 }
